@@ -7,7 +7,8 @@ Ta linijka została dopisana w innym repozytorium
 
 Mogę coś dodać od siebie
 
-Dodałem to, czego brakowało hfvbe
+Dodałem to, czego brakowało
 
 Aa, zapomniałem jeszcze o tym!
 
+i o tym też

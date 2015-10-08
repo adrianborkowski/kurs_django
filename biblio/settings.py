@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'shelf',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,7 +92,7 @@ TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True # internationalization
 
-USE _L10N = True # localization
+USE_L10N = True # localization
 
 USE_TZ = True
 
