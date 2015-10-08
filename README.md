@@ -7,4 +7,4 @@ Ta linijka została dopisana w innym repozytorium
 
 Mogę coś dodać od siebie
 
-Dodałem to, czego brakowało
+Dodałem to, czego brakowało hfvbe
