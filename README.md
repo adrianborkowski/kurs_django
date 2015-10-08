@@ -8,3 +8,6 @@ Ta linijka została dopisana w innym repozytorium
 Mogę coś dodać od siebie
 
 Dodałem to, czego brakowało hfvbe
+
+Aa, zapomniałem jeszcze o tym!
+
