@@ -12,97 +12,130 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wkgny7baqrrn998q=d3w*&(-aj%l^m$k$r)+dr2*8ri@g96zgs'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+from configurations import Configuration
 
 
-# Application definition
+class Production(Configuration):
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'shelf',
-    'contact',
-    'rental',
-)
 
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-)
+    # Quick-start development settings - unsuitable for production
+    # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-ROOT_URLCONF = 'biblio.urls'
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = 'wkgny7baqrrn998q=d3w*&(-aj%l^m$k$r)+dr2*8ri@g96zgs'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = False
 
-                 ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
+    ALLOWED_HOSTS = ['127.0.0.1']
+
+
+    # Application definition
+
+    INSTALLED_APPS = (
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'django.contrib.sites',
+
+        ##########################
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        'allauth.socialaccount.providers.facebook',
+
+        ##########################
+        'shelf',
+        'contact',
+        'rental',
+        'users',
+    )
+
+    MIDDLEWARE_CLASSES = (
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'django.middleware.security.SecurityMiddleware',
+    )
+
+    ROOT_URLCONF = 'biblio.urls'
+
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [
+                os.path.join(BASE_DIR, 'templates'),
+
+                     ],
+            'APP_DIRS': True,
+            # 'TEMPLATE_DEBUG': False,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                    'django.template.context_processors.request',
+                ],
+            },
         },
-    },
-]
+    ]
 
-WSGI_APPLICATION = 'biblio.wsgi.application'
+    WSGI_APPLICATION = 'biblio.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+    # Database
+    # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
+    # Internationalization
+    # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'pl'
+    LANGUAGE_CODE = 'pl'
 
-TIME_ZONE = 'Europe/Warsaw'
+    TIME_ZONE = 'Europe/Warsaw'
 
-USE_I18N = True # internationalization
+    USE_I18N = True  # internationalization
 
-USE_L10N = True # localization
+    USE_L10N = True  # localization
 
-USE_TZ = True
+    USE_TZ = True
+
+    AUTH_USER_MODEL = 'users.BiblioUser'
+
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+    STATIC_URL = '/static/'
+
+    AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+        'allauth.account.auth_backends.AuthenticationBackend',
+    )
+
+    SITE_ID = 1  # because of  'django.contrib.sites'
+
+    LOGIN_URL = 'main-page'
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+class Dev(Production):
+    DEBUG = True
 
-STATIC_URL = '/static/'
+    # TEMPLATE_DEBUG = True
+
+    EMAIL_BACKEND = 'django.core.mail.backends.consloe.EmailBackend'

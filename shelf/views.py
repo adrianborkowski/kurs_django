@@ -1,6 +1,14 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
+from django.http import HttpResponse
+
 from .models import Author, Book
+
+
+class MainPageView(TemplateView):
+    template_name = 'index.html'
+
+index_view = MainPageView.as_view()
 
 
 class AuthorListView(ListView):
