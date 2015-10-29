@@ -34,6 +34,13 @@ class Production(Configuration):
     # Application definition
 
     INSTALLED_APPS = (
+        'shelf',
+        'contact',
+        'rental',
+        'users',
+
+        ##########################
+
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
@@ -41,18 +48,14 @@ class Production(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
         'django.contrib.sites',
+        'bootstrap3',
 
         ##########################
+
         'allauth',
         'allauth.account',
         'allauth.socialaccount',
         'allauth.socialaccount.providers.facebook',
-
-        ##########################
-        'shelf',
-        'contact',
-        'rental',
-        'users',
     )
 
     MIDDLEWARE_CLASSES = (
@@ -83,7 +86,13 @@ class Production(Configuration):
                     'django.template.context_processors.request',
                     'django.contrib.auth.context_processors.auth',
                     'django.contrib.messages.context_processors.messages',
-                    'django.template.context_processors.request',
+                    "django.template.context_processors.i18n",
+                    "django.template.context_processors.media",
+                    "django.template.context_processors.static",
+                    "django.template.context_processors.tz",
+                    # 'allauth.socialaccount.context_processors.socialaccount',
+                    # 'allauth.account.context_processors.account',
+
                 ],
             },
         },
@@ -121,7 +130,18 @@ class Production(Configuration):
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
     STATIC_URL = '/static/'
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+    MEDIA_URL = '/media/'
+
+    STATICFILES_DIRS = [
+        ("media", os.path.join(BASE_DIR, 'media')),
+    ]
+
 
     AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
@@ -130,12 +150,12 @@ class Production(Configuration):
 
     SITE_ID = 1  # because of  'django.contrib.sites'
 
-    LOGIN_URL = 'main-page'
+    LOGIN_REDIRECT_URL = 'main-page'
 
 
 class Dev(Production):
     DEBUG = True
 
-    # TEMPLATE_DEBUG = True
+    # TEMPLATES[['TEMPLATE_DEBUG']] = True
 
     EMAIL_BACKEND = 'django.core.mail.backends.consloe.EmailBackend'

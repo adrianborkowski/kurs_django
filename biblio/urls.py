@@ -23,4 +23,7 @@ urlpatterns = [
     url(r'^contact/$', MessageAddView.as_view()),
     url(r'^$', 'shelf.views.index_view', name='main-page'),
     url(r'^accounts/', include('allauth.urls')),
+    # url(r'^accounts/profile/$', MyProfileView.as_view()),
+
 ]
+

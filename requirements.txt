@@ -3,6 +3,7 @@ Pillow==3.0.0
 decorator==4.0.4
 defusedxml==0.4.1
 django-allauth==0.23.0
+django-bootstrap3==6.2.2
 django-configurations==0.8
 ipython==4.0.0
 ipython-genutils==0.1.0
